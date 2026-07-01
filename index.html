@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Mary22 Art Website</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Patrick+Hand&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Patrick Hand', cursive;
+      background: #d8cfc3;
+      color: #3d3d3d;
+      min-height: 100vh;
+      background-image:
+        radial-gradient(#b8aa98 1px, transparent 1px),
+        linear-gradient(#00000008 1px, transparent 1px);
+      background-size: 24px 24px, 100% 32px;
+    }
+
+    .page {
+      width: min(1050px, 92%);
+      margin: 40px auto;
+      background: #f5f1e8;
+      padding: 35px;
+      border-radius: 8px;
+      box-shadow: 0 20px 40px #00000033;
+      position: relative;
+      border: 1px solid #d8cfc3;
+      overflow: hidden;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #c9bca9;
+    }
+
+    .page::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 30%, #00000008, transparent 18%),
+        radial-gradient(circle at 80% 10%, #00000006, transparent 20%),
+        radial-gradient(circle at 70% 80%, #00000007, transparent 22%);
+    }
+
+    header,
+    section,
+    footer {
+      position: relative;
+      z-index: 2;
+    }
+
+    header {
+      text-align: center;
+      padding: 45px 20px 35px;
+      animation: aparecer 0.8s ease both;
+    }
+
+    h1 {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(42px, 8vw, 76px);
+      color: #333;
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+
+    .subtitle {
+      font-size: 29px;
+      color: #6a6259;
+      max-width: 680px;
+      margin: auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin: 35px 0;
+    }
+
+    nav a {
+      color: #3d3d3d;
+      text-decoration: none;
+      font-size: 24px;
+      padding: 6px 14px;
+      border-bottom: 2px solid #777;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      transform: rotate(-2deg);
+      background: #eee7da;
+    }
+
+    .hero-img {
+      width: min(330px, 85%);
+      display: block;
+      margin: 35px auto 10px;
+      filter: grayscale(100%);
+      transform: rotate(-2deg);
+      border: 10px solid #eee7da;
+      box-shadow: 0 8px 18px #00000030;
+      animation: flotar 4s ease-in-out infinite;
+    }
+
+    section {
+      margin: 80px 0;
+      padding-left: 25px;
+      animation: aparecer 0.8s ease both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 30%;
+    }
+
+    h2 {
+      font-family: 'Caveat', cursive;
+      font-size: 50px;
+      margin-bottom: 20px;
+      border-bottom: 2px dashed #7a7268;
+      display: inline-block;
+      color: #333;
+    }
+
+    p {
+      font-size: 24px;
+      line-height: 1.5;
+      max-width: 740px;
+    }
+
+    strong {
+      color: #2f2f2f;
+    }
+
+    .note {
+      background: #eee7da;
+      padding: 25px;
+      max-width: 620px;
+      box-shadow: 0 8px 18px #00000020;
+      transform: rotate(1deg);
+      font-size: 24px;
+      border: 1px solid #d8cfc3;
+    }
+
+    .note p {
+      margin-bottom: 18px;
+    }
+
+    .gallery,
+    .sketch-gallery {
+      display: grid;
+      gap: 35px;
+      margin-top: 30px;
+    }
+
+    .gallery {
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    }
+
+    .sketch-gallery {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 28px;
+    }
+
+    .art-card,
+    .sketch-card {
+      background: #eee7da;
+      padding: 12px;
+      box-shadow: 0 8px 18px #00000025;
+      transform: rotate(-2deg);
+      transition: 0.25s;
+      position: relative;
+      border: 1px solid #d8cfc3;
+    }
+
+    .art-card:nth-child(even),
+    .sketch-card:nth-child(even) {
+      transform: rotate(2deg);
+    }
+
+    .art-card:hover,
+    .sketch-card:hover {
+      transform: scale(1.05) rotate(0deg);
+    }
+
+    .art-card::before,
+    .sketch-card::before {
+      content: "";
+      width: 70px;
+      height: 22px;
+      background: #d8cfc3cc;
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-3deg);
+    }
+
+    .art-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%);
+    }
+
+    .sketch-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%);
+    }
+
+    .socials {
+      margin-top: 20px;
+    }
+
+    .socials a {
+      display: inline-block;
+      margin: 10px;
+      font-size: 26px;
+      color: #3d3d3d;
+      text-decoration: none;
+      border: 2px solid #777;
+      padding: 8px 18px;
+      border-radius: 6px;
+      background: #f5f1e8;
+      transition: 0.2s;
+    }
+
+    .socials a:hover {
+      background: #eee7da;
+      transform: rotate(-2deg);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 26px;
+      padding: 40px 0 10px;
+      color: #6a6259;
+    }
+
+    @keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(40px) rotate(-1deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes flotar {
+  0% {
+    transform: rotate(-2deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(-2deg) translateY(-10px);
+  }
+
+  100% {
+    transform: rotate(-2deg) translateY(0);
+  }
+}
+
+@keyframes entradaFoto {
+  from {
+    opacity: 0;
+    transform: scale(0.9) rotate(-6deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(-2deg);
+  }
+}
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 24px;
+        margin: 20px auto;
+      }
+
+      .page::before {
+        left: 16px;
+      }
+
+      section {
+        padding-left: 10px;
+      }
+
+      nav a {
+        font-size: 22px;
+      }
+
+      .subtitle {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+<header id="inicio">
+  <h1>《★~Mary22🐈‍⬛~★》</h1>
+
+  <p class="subtitle">
+    "Nunca es tarde para aprender a mejorar."
+  </p>
+
+  <nav>
+    <a href="#presentacion">Presentación</a>
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="#mi-arte">Mi arte</a>
+    <a href="#galeria">Galería</a>
+    <a href="#bocetos">Bocetos</a>
+    <a href="#redes">Redes</a>
+  </nav>
+
+  <img src="principal.jpg" class="hero-img" alt="Mary22">
+</header>
+
+<section id="presentacion">
+  <h2>Presentación</h2>
+
+  <p>¡Hola! Soy Mary.</p>
+
+  <br>
+
+  <p>
+    Dibujo desde los <strong>5 años</strong> de manera tradicional y desde
+    <strong>2023</strong> también realizo ilustraciones digitales.
+  </p>
+
+  <br>
+
+  <p>
+    Con cada dibujo intento aprender algo nuevo y seguir mejorando poco a poco,
+    porque creo firmemente que
+    <strong>"nunca es tarde para aprender a mejorar".</strong>
+  </p>
+</section>
+
+<section id="sobre-mi">
+  <h2>Sobre mí</h2>
+
+  <p>
+    Mi mayor inspiración es <strong>Derrick J. Wyatt</strong>,
+    a quien considero mi ídolo y una figura muy importante para mí.
+  </p>
+
+  <br>
+
+  <p>
+    Mi personalidad podría describirse como intensa, curiosa y amigable.
+    Siempre me gusta descubrir cosas nuevas e intentar mejorar en lo que hago.
+  </p>
+
+  <br>
+
+  <p>
+    Una curiosidad sobre mí es que también tengo algunos dotes musicales,
+    aunque todavía sigo desarrollándolos.
+  </p>
+</section>
+
+<section id="mi-arte">
+  <h2>Mi arte</h2>
+
+  <p>
+    Mi arte significa muchísimo para mí, ya que es la forma en la que puedo expresar
+    las cosas que me gustan, las historias que imagino y las emociones que siento.
+  </p>
+
+  <br>
+
+  <p>
+    Mi estilo es sencillo. No busco hacer ilustraciones extremadamente complejas;
+    prefiero acercarme a la estética de los cómics y caricaturas de los años 2000.
+  </p>
+
+  <br>
+
+  <p>Algunos artistas que inspiran mi trabajo son:</p>
+
+  <br>
+
+  <div class="note">
+    <p>
+      ✦ Derrick J. Wyatt<br>
+      <a href="https://x.com/ElPiromanias"> ✦ Elpiromanias</a><br>
+      <a href="https://x.com/sad_conito"> ✦ Sad Conito</a><br>
+      <a href="https://x.com/GarpSand"> ✦ Garp Sand</a><br>
+    </p>
+  </div>
+</section>
+
+<section id="galeria">
+  <h2>Algunos de mis dibujos</h2>
+
+  <div class="gallery">
+    <div class="art-card"><img src="importante2.jpg" alt="Dibujo de Mary22"></div>
+    <div class="art-card"><img src="importante3.jpg" alt="Dibujo de Mary22"></div>
+    <div class="art-card"><img src="importante4.jpg" alt="Dibujo de Mary22"></div>
+    <div class="art-card"><img src="importante5.png" alt="Dibujo de Mary22"></div>
+  </div>
+</section>
+
+<section id="bocetos">
+  <h2>Bocetos y garabatos</h2>
+
+  <p>
+    Aquí hay más dibujos, pruebas, ideas y pequeños bocetos como si fueran
+    páginas sueltas dentro del cuaderno.
+  </p>
+
+  <div class="sketch-gallery">
+    <div class="sketch-card"><img src="1000268437.jpg" alt="Boceto"></div>
+    <div class="sketch-card"><img src="1000270197.png" alt="Boceto"></div>
+    <div class="sketch-card"><img src="1000270325.png" alt="Boceto"></div>
+    <div class="sketch-card"><img src="1000270326.png" alt="Boceto"></div>
+    <div class="sketch-card"><img src="1000270483.png" alt="Boceto"></div>
+    <div class="sketch-card"><img src="1000271039.png" alt="Boceto"></div>
+    <div class="sketch-card"><img src="1000271838.jpg" alt="Boceto"></div>
+    <div class="sketch-card"><img src="1000274657.png" alt="Boceto"></div>
+    <div class="sketch-card"><img src="1000274658.png" alt="Boceto"></div>
+    <div class="sketch-card"><img src="1000274659.png" alt="Boceto"></div>
+    <div class="sketch-card"><img src="1000274660.png" alt="Boceto"></div>
+    <div class="sketch-card"><img src="1000275785.jpg" alt="Boceto"></div>
+    <div class="sketch-card"><img src="1000279198.jpg" alt="Boceto"></div>
+  </div>
+</section>
+
+<section id="redes">
+  <h2>Mis redes</h2>
+
+  <p>
+    Si quieres seguir viendo mi trabajo o simplemente pasar a saludar,
+    puedes encontrarme aquí.
+  </p>
+
+  <div class="socials">
+    <a href="https://x.com/Ma12641567Josue">Twitter / X</a>
+  </div>
+</section>
+
+<footer>
+  Gracias por visitar mi pequeño cuaderno.
+  <br><br>
+  ♡ Espero que disfrutes tu estancia ♡
+</footer>
+
+</div>
+
+</body>
+</html>
