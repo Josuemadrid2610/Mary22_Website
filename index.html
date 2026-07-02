@@ -259,6 +259,48 @@
       color: #6a6259;
     }
 
+    /* MARCA DE AGUA */
+
+.watermark {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px 14px;
+
+  border: 2px solid rgba(255,255,255,.35);
+  border-radius: 999px;
+
+  background: rgba(245,241,232,.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  color: #333;
+  text-decoration: none;
+  font-size: .85rem;
+  line-height: 1.15;
+
+  box-shadow: 0 8px 18px rgba(0,0,0,.15);
+  transition: .25s;
+}
+
+.watermark img{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #444;
+}
+
+.watermark:hover{
+  transform:scale(1.05) rotate(-2deg);
+}
+
     @keyframes aparecer {
   from {
     opacity: 0;
@@ -318,10 +360,33 @@
       .subtitle {
         font-size: 24px;
       }
+
+      .watermark{
+      right:12px;
+      bottom:12px;
+      padding:8px 12px;
+      font-size:.75rem;
+      }
+
+      .watermark img{
+        width:32px;
+        height:32px;
+      }
     }
   </style>
 </head>
+    <a href="https://x.com/itsbynyko"
+      target="_blank"
+      class="watermark">
 
+        <span>
+            Web por:<br>
+            <strong>Itsbynyko</strong>
+        </span>
+
+        <img src="Itsbynyko_logo.png" alt="Logo">
+
+    </a>
 <body>
 
 <div class="page">
